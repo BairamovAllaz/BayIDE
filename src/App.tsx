@@ -1,25 +1,37 @@
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Folder from './components/Folder';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Code from './components/Code';
+
+interface AppContextInterFace {
+  file: File | null,
+  setFile: React.Dispatch<React.SetStateAction<File | null>>,
+  fileContent: string | ArrayBuffer | null | undefined,
+  setFileContent: React.Dispatch<React.SetStateAction<string | ArrayBuffer | null | undefined>>
+}
+
+export const MainContext = React.createContext<AppContextInterFace | null>(null);
 
 function App() {
+  const [file, setFile] = React.useState<File | null>(null);
+  const [fileContent, setFileContent] = React.useState < string | ArrayBuffer | null | undefined>(null);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainContext.Provider value = {{file,setFile,fileContent,setFileContent} as AppContextInterFace | null}>
+      <Box className="App">
+        <Grid container spacing = {2}>
+          <Grid item xs={3} sx = {{border : "solid 1px black"}}>
+            <Folder/>
+          </Grid>
+          <Grid item xs={7} sx={{ border: "solid 1px black" }}>
+            <Code/>
+          </Grid>
+          <Grid item xs={2} sx={{ border: "solid 1px black" }}>Code result area</Grid>  
+          <Grid item xs={12} sx={{ border: "solid 1px black" }}>Terminal</Grid>
+        </Grid> 
+      </Box>
+    </MainContext.Provider>
   );
 }
 
