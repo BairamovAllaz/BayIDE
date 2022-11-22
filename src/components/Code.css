@@ -1,6 +1,6 @@
 .CodeWrapper{ 
     width: 100%;
-    height : 100%; 
+    height : 100vh; 
     overflow-y: auto;
     counter-reset: line;
 }
@@ -21,6 +21,9 @@
     -ms-font-feature-settings: common-ligatures;
     color: black;
     resize: none;
+
+    white-space: pre-line;
+
 }
 
 .editor div {
