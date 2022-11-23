@@ -36,10 +36,10 @@ function App() {
       {
           if(!file) return;
           const writeable = await file.createWritable(); 
+          console.log(changedText);
           await writeable.write(changedText as FileSystemWriteChunkType);
           await writeable.close();
       }
-      
     })
   })
 

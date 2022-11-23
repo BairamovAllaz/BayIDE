@@ -6,7 +6,7 @@ function Code() {
     const appContext = React.useContext(MainContext);
 
     const handleDivChange = (event : React.FormEvent<HTMLDivElement>) => { 
-        appContext?.setChagedText(event.currentTarget.textContent);
+        appContext?.setChagedText(event.currentTarget.innerText);
     }
 
     return (

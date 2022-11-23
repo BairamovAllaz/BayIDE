@@ -21,14 +21,13 @@
     -ms-font-feature-settings: common-ligatures;
     color: black;
     resize: none;
-
-    white-space: pre-line;
-
+    white-space: pre-wrap
 }
 
 .editor div {
     padding-left: 3rem;
     position: relative;
+    white-space: pre-wrap;
 }
 
 .editor div::before {
@@ -40,4 +39,5 @@
     text-align: right;
     left: 0;
     position: absolute;
+    white-space: pre-wrap
 }
