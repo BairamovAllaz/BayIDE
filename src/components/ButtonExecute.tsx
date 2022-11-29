@@ -1,31 +1,40 @@
-import React from 'react'
+import { errorMonitor } from "events";
 
-interface ExecuteConfig
-{ 
-    executeString : string | null,
-    handleChangeExecuteResult(change : string[]) : void
+interface ExecuteConfig {
+    executeString: string | null;
+    handleChangeExecuteResult(change: string[]): void;
 }
 
 function ButtonExecute(prop: ExecuteConfig) {
-
-
-    async function ExecuteStringToJavascript() : Promise<void>
-    { 
+    async function ExecuteStringToJavascript(): Promise<void> {
         console.info(prop.executeString);
-        const tempConsole = console.log; 
-        const outputs: string[] = []; 
-        console.log = (log) => { 
+        const tempConsole = console.log;
+        const outputs: string[] = [];
+        console.log = (log) => {
             outputs.push(log);
-        }
-        prop.handleChangeExecuteResult([...outputs]);
-        eval(`${prop.executeString}`);
-        console.info(outputs);
+        };
+        runJavacript();
         console.log = tempConsole;
+        console.log(outputs);
+        prop.handleChangeExecuteResult(outputs);
     }
 
-  return (
-    <button style={{margin : "20px"}} onClick = {ExecuteStringToJavascript}>Execute</button> 
-  )
+    function runJavacript() : void
+    { 
+        try {
+            eval(`${prop.executeString}`);
+        } catch (err: any) {
+            if (err instanceof SyntaxError) {
+                console.log("Error: " + err.message);
+            }
+        }
+    }
+
+    return (
+        <button style={{ margin: "20px" }} onClick={ExecuteStringToJavascript}>
+            Run
+        </button>
+    );
 }
 
-export default ButtonExecute
+export default ButtonExecute;

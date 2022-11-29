@@ -6,19 +6,19 @@ import ButtonExecute from './ButtonExecute';
 function Code() {
     const appContext = React.useContext(MainContext);
 
-    const handleDivChange = (event : React.FormEvent<HTMLDivElement>) => { 
+    const handleDivChange = (event: React.FormEvent<HTMLDivElement>) => {
         appContext?.setChagedText(event.currentTarget.innerText);
     }
 
-    const handleChangeExecuteResult = (change : string[]) => { 
+    const handleChangeExecuteResult = (change: string[]) => {
         appContext?.setExecuteResult(change);
     }
 
     return (
         <div>
-            <ButtonExecute executeString = {appContext?.fileContent as string} handleChangeExecuteResult = {handleChangeExecuteResult}/>
+            <ButtonExecute executeString={appContext?.changedText as string} handleChangeExecuteResult={handleChangeExecuteResult} />
             <div className="CodeWrapper">
-                <div className="editor" contentEditable = "true" onInput={handleDivChange}>
+                <div className="editor" contentEditable="true" onInput={handleDivChange} suppressContentEditableWarning={true}>
                     <div>
                         {/* TODO FIX LINE BREAK BETWEEN LINES!!! */}
                         {(appContext?.fileContent as string)}

@@ -10,11 +10,21 @@ function Folder() {
   const [fileNameToCreate,setFileNameToCreate] = React.useState<string | null>(null);
   const [directoryHandle, setDirectoryHandle] = React.useState <FileSystemDirectoryHandle>();
   
+
+
+  async function saveFolderToLocal(folder: FileSystemDirectoryHandle) 
+  { 
+      const jsonString : string = JSON.stringify(folder);
+      console.log(jsonString);
+      console.log(folder.keys());
+      localStorage.setItem("project",jsonString);
+  }
+
+
   const ClickOpenFolder = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     
     const dirHandle = await window.showDirectoryPicker();
-
     setDirectoryHandle(dirHandle);
 
     const promises: any[] = [];
@@ -27,6 +37,7 @@ function Folder() {
     }
     
     setFileList(promises);
+    saveFolderToLocal(dirHandle);
   }
 
   function readFileData(file: File | null) {
@@ -114,14 +125,6 @@ function Folder() {
       await directoryHandle?.removeEntry(fileName);
       setFileList(fileList.filter(file => file.name != fileName));
   }
-
-  async function OpenPromptRenameFile(file: FileSystemFileHandle) : Promise<void>
-  { 
-    let newfileName : string | null = prompt("Rename file","Enter new file name");
-    if(!newfileName) return; 
-
-  }
-
 
   return (
     <div>

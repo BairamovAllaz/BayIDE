@@ -10,8 +10,8 @@ interface AppContextInterFace {
   setFile: React.Dispatch<React.SetStateAction<FileSystemFileHandle | null>>,
   fileContent: string | ArrayBuffer | null | undefined,
   setFileContent: React.Dispatch<React.SetStateAction<string | ArrayBuffer | null | undefined>>
-  changedText: string | null,
-  setChagedText : React.Dispatch<React.SetStateAction<string | null>>
+  changedText: string | FileSystemWriteChunkType | null,
+  setChagedText: React.Dispatch<React.SetStateAction<string | FileSystemWriteChunkType |  null>>
   executeResult : string[] | null,
   setExecuteResult: React.Dispatch<React.SetStateAction<string[] | null>>,
 }
@@ -21,7 +21,7 @@ export const MainContext = React.createContext<AppContextInterFace | null>(null)
 function App() {
   const [file, setFile] = React.useState<FileSystemFileHandle | null>(null);
   const [fileContent, setFileContent] = React.useState < string | ArrayBuffer | null | undefined>(null);
-  const [changedText, setChangedText] = React.useState<string | null>(null);
+  const [changedText, setChangedText] = React.useState < string | FileSystemWriteChunkType | null>(null);
   const [executeResult, setExecuteResult] = React.useState<string[] | null>(null);
 
   const AppContextObject : AppContextInterFace = {
@@ -61,7 +61,6 @@ function App() {
           <Grid item xs={2} sx={{ border: "solid 1px black" }}>
             <OutPut/>  
           </Grid>  
-          <Grid item xs={12} sx={{ border: "solid 1px black" }}>Terminal</Grid>
         </Grid> 
       </Box>
     </MainContext.Provider>
