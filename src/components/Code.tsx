@@ -14,6 +14,12 @@ function Code() {
         appContext?.setExecuteResult(change);
     }
 
+    React.useEffect(() => { 
+        if(!appContext?.changedText) return;
+        var length = (appContext?.changedText as string).split(/\r\n|\r|\n/).length;
+        console.log(length);
+    },[appContext?.changedText])
+
     return (
         <div>
             <ButtonExecute executeString={appContext?.changedText as string} handleChangeExecuteResult={handleChangeExecuteResult} />
