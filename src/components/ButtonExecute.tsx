@@ -1,13 +1,11 @@
-import { errorMonitor } from "events";
-
 interface ExecuteConfig {
     executeString: string | null;
     handleChangeExecuteResult(change: string[]): void;
 }
 
 function ButtonExecute(prop: ExecuteConfig) {
+
     async function ExecuteStringToJavascript(): Promise<void> {
-        console.info(prop.executeString);
         const tempConsole = console.log;
         const outputs: string[] = [];
         console.log = (log) => {
@@ -15,7 +13,6 @@ function ButtonExecute(prop: ExecuteConfig) {
         };
         runJavacript();
         console.log = tempConsole;
-        console.log(outputs);
         prop.handleChangeExecuteResult(outputs);
     }
 

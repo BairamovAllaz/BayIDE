@@ -14,20 +14,20 @@ function Code() {
         appContext?.setExecuteResult(change);
     }
 
-    React.useEffect(() => { 
-        if(!appContext?.changedText) return;
-        var length = (appContext?.changedText as string).split(/\r\n|\r|\n/).length;
-        console.log(length);
-    },[appContext?.changedText])
-
     return (
         <div>
             <ButtonExecute executeString={appContext?.changedText as string} handleChangeExecuteResult={handleChangeExecuteResult} />
             <div className="CodeWrapper">
                 <div className="editor" contentEditable="true" onInput={handleDivChange} suppressContentEditableWarning={true}>
                     <div>
-                        {/* TODO FIX LINE BREAK BETWEEN LINES!!! */}
-                        {(appContext?.fileContent as string)}
+                        {/* Fix the line change exception!!! */}
+                        {
+                            (appContext?.fileContent as string) && (
+                                appContext?.fileContent as string).split(/\r\n|\r|\n/).map(line => (
+                                    <p>{line}</p>
+                                )
+                            ) 
+                        }
                     </div>
                 </div>
             </div>

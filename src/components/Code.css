@@ -24,13 +24,13 @@
     white-space: pre-wrap
 }
 
-.editor div {
+.editor p {
     padding-left: 3rem;
     position: relative;
     white-space: pre-wrap;
 }
 
-.editor div::before {
+.editor p::before {
     counter-increment: line;
     content: counter(line);
     font-size: 1em;

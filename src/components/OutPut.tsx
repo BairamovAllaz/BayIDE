@@ -8,8 +8,8 @@ function OutPut() {
     return (
         <div>
             {
-                appContext?.executeResult?.map(result => (
-                    <div>{result}</div>
+                appContext?.executeResult?.map((result,i) => (
+                    <div key = {i}>{result}</div>
                 ))
             }
         </div>

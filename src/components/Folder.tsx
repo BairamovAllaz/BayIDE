@@ -10,17 +10,6 @@ function Folder() {
   const [fileNameToCreate,setFileNameToCreate] = React.useState<string | null>(null);
   const [directoryHandle, setDirectoryHandle] = React.useState <FileSystemDirectoryHandle>();
   
-
-
-  async function saveFolderToLocal(folder: FileSystemDirectoryHandle) 
-  { 
-      const jsonString : string = JSON.stringify(folder);
-      console.log(jsonString);
-      console.log(folder.keys());
-      localStorage.setItem("project",jsonString);
-  }
-
-
   const ClickOpenFolder = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     
@@ -37,7 +26,6 @@ function Folder() {
     }
     
     setFileList(promises);
-    saveFolderToLocal(dirHandle);
   }
 
   function readFileData(file: File | null) {
@@ -74,7 +62,7 @@ function Folder() {
   async function handleFileClickChange(e: React.MouseEvent<HTMLElement>, file: FileSystemFileHandle)
   { 
       e.preventDefault();
-      appContext?.setFileContent("");
+      appContext?.setFileContent(null);
       appContext?.setFile(file);
       const fileBlob = await file.getFile();
       readFileData(fileBlob);

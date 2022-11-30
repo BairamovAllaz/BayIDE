@@ -4,17 +4,8 @@ import Folder from './components/Folder';
 import React from 'react';
 import Code from './components/Code';
 import OutPut from './components/OutPut';
+import { AppContextInterFace } from './AppContextInterface';
 
-interface AppContextInterFace {
-  file: FileSystemFileHandle | null,
-  setFile: React.Dispatch<React.SetStateAction<FileSystemFileHandle | null>>,
-  fileContent: string | ArrayBuffer | null | undefined,
-  setFileContent: React.Dispatch<React.SetStateAction<string | ArrayBuffer | null | undefined>>
-  changedText: string | FileSystemWriteChunkType | null,
-  setChagedText: React.Dispatch<React.SetStateAction<string | FileSystemWriteChunkType |  null>>
-  executeResult : string[] | null,
-  setExecuteResult: React.Dispatch<React.SetStateAction<string[] | null>>,
-}
 
 export const MainContext = React.createContext<AppContextInterFace | null>(null);
 
